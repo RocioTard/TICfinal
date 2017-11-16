@@ -43,7 +43,7 @@ function TraerNoticiasDestacadas($set,$offset){
 	}
 	return [];
 }
-	
+
 
 
 
