@@ -1,7 +1,17 @@
 <?php
 require_once("Functions.php");
 $destacadas = TraerNoticiasDestacadas(6, 0);
-$noticias = TraerNoticias(6, 0);
+$noticias = TraerNoticias(1, 0);
+$cantNoticias = CantidadNoticias();
+
+$limit = 1;
+
+if (isset($_GET['page'])){
+	$page = $_GET['page'];
+	$offset = ($page - 1) * $limit;
+	$noticias = TraerNoticias(1, $offset);
+}
+
 ?>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -32,6 +42,17 @@ foreach($noticias as $n){
 		</article> 
 	</div>
 <?php } ?>
+
+<div class="pagination">
+<?php
+$pages = $cantNoticias / $limit;
+
+for ($x = 1; $x <= $pages; $x++) {
+    echo '<a href="home.php?page=' . $x . '">'. $x .'</a>';
+} 
+?>
+</div>
+
 </div>
 
 

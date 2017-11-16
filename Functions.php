@@ -44,6 +44,14 @@ function TraerNoticiasDestacadas($set,$offset){
 	return [];
 }
 
+function CantidadNoticias() {
+	$db = AbrirConexion();
+		$stmt = $db->prepare("SELECT COUNT(*) as total FROM noticias");
+		$stmt->execute();
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		return $result['total'];
+}
 
 
 
