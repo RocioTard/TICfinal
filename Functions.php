@@ -14,9 +14,8 @@ function TraerNoticia($id){
 		$stmt->execute();
 	if($noticia = $stmt->fetch(PDO::FETCH_ASSOC)){
 		return $noticia;
-	} else {
-		return null;
 	}
+	return null;
 }
 
 function TraerNoticias($set,$offset){
@@ -27,9 +26,8 @@ function TraerNoticias($set,$offset){
 		$stmt->execute();
 	if($noticias = $stmt->fetchAll(PDO::FETCH_ASSOC)){
 		return $noticias;
-	} else {
-		return null;
 	}
+		return [];
 }
 
 function TraerNoticiasDestacadas($set,$offset){
@@ -52,6 +50,3 @@ function CantidadNoticias() {
 
 		return $result['total'];
 }
-
-
-
