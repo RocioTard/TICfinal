@@ -1,30 +1,59 @@
 <?php
-required_once("Funtions.php");
+require_once("Functions.php");
 
-$noticias = TraerNoticias(0, 10);
+$noticias = TraerNoticias(2, 0);
+$cantNoticias = CantidadNoticias();
 
-foreach($noticias as $n){
-	echo "
-	<selection class='ultima'>
-	<article class='articulo'>
-  <header>
-    <h2>".$n['Titulo']."</h2>
-  </header>
-  <section class='Copete'>
-    <p>".$n['Copete']."</p>
-	<img src="" class='imgArticulo'/>
-  </section>
-  <section class='descripcion'>
-    <p>".$n['Descripcion']."</p>
-  </section>
-  <footer>
-    <p>Posteado en<time datetime=".$n['Fecha'].">".$n['Fecha']."</time></p>
-  </footer>
-	<a href='noticia/detalle.php?id=".$n['id']."'>Ver Detalle</a>
-</article> </selection>";
+$limit = 2;
+
+if (isset($_GET['page'])){
+	$page = $_GET['page'];
+	$offset = ($page - 1) * $limit;
+	$noticias = TraerNoticias(2, $offset);
 }
 
 ?>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+
+
+<div class="col-xs-12 col-md-8">
+<h1>Ultimas</h1>
+<?php
+foreach($noticias as $n){
+	?>
+	<div class="noticia">
+		<article class="articulo">
+		  <header>
+			<h2><?php echo $n['titulo'] ?></h2>
+		  </header>
+		  <section class="Copete">
+			<p><?php $n['copete'] ?></p>
+			<img src="<?php echo $n['image'] ?>" class="imgArticulo" />
+		  </section>
+		  <section class="descripcion">
+			<p><?php echo $n['texto'] ?></p>
+		  </section>
+		  <footer>
+			<p>Posteado en <time datetime='<?php echo $n['fecha'] ?>'><?php echo $n['fecha'] ?></time></p>
+		  </footer>
+			<a href="detalle.php?id=<?php echo $n['id']?>">Ver Detalle</a>
+		</article> 
+	</div>
+<?php } ?>
+
+
+<div class="pagination">
+<?php
+$pages = $cantNoticias / $limit;
+
+for ($x = 1; $x <= $pages; $x++) {
+    echo '<a href="ultimas.php?page=' . $x . '">'. $x .'</a>';
+} 
+?>
+</div>
 
 
 

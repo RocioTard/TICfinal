@@ -26,7 +26,7 @@ $n = TraerNoticia($id);
 		  <footer>
 			<p>Posteado en <time datetime='<?php echo $n['fecha'] ?>'><?php echo $n['fecha'] ?></time></p>
 		  </footer>
-			<a href="home.php">Atras</a>
+			<a href="index.php">Atras</a>
 		</article> 
 	</div>
 </div>

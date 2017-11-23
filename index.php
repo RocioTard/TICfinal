@@ -1,15 +1,14 @@
 <?php
 require_once("Functions.php");
 $destacadas = TraerNoticiasDestacadas(6, 0);
-$noticias = TraerNoticias(1, 0);
+$noticias = TraerNoticias(2, 0);
 $cantNoticias = CantidadNoticias();
-
-$limit = 1;
+$limit = 2;
 
 if (isset($_GET['page'])){
 	$page = $_GET['page'];
 	$offset = ($page - 1) * $limit;
-	$noticias = TraerNoticias(1, $offset);
+	$noticias = TraerNoticias(2, $offset);
 }
 
 ?>
@@ -48,7 +47,7 @@ foreach($noticias as $n){
 $pages = $cantNoticias / $limit;
 
 for ($x = 1; $x <= $pages; $x++) {
-    echo '<a href="home.php?page=' . $x . '">'. $x .'</a>';
+    echo '<a href="index.php?page=' . $x . '">'. $x .'</a>';
 } 
 ?>
 </div>
